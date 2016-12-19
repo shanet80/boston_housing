@@ -14520,7 +14520,7 @@ kqBFREREDJj/B0rR24PJW93qAAAAAElFTkSuQmCC
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer: </strong> With a maximum depth of 1 the model has a high variance as seen in the lower scores. With a maximum depth of 10 the model suffers from a high bias due to being overfit to the training data.</p>
+<p><strong>Answer: </strong> With a maximum depth of 1 the model has a high bias as seen in the lower scores, this is due to the model not adequately capturing what is going on with the data. With a maximum depth of 10 the model suffers from a high variance due to being overfit to the training data.</p>
 
 </div>
 </div>
@@ -14571,7 +14571,7 @@ kqBFREREDJj/B0rR24PJW93qAAAAAElFTkSuQmCC
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer: </strong> Grid search is a technique of exhaustively searching through a set of hyperparameters to determine which settings for a particular model result in the best generalized fit. Rather than manually adjusting hyperparameters and testing results individually, grid search allows multiple possible parameter settings to be tested at once.</p>
+<p><strong>Answer: </strong> Grid search is a technique of exhaustively searching through a set of hyperparameters to determine which settings for a particular model result in the best generalized fit. In the example in this project the hyperparameter being tested is max depth. By training the algorithm on a subset of the data with each depth in a range from 1 to 10 and testing against a different subset of that data we are able to determine which max depth gives the best results while not overfitting the data.</p>
 
 </div>
 </div>
@@ -14592,7 +14592,8 @@ kqBFREREDJj/B0rR24PJW93qAAAAAElFTkSuQmCC
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer: </strong> K-fold cross validation is splitting data up into folds. This allows training and testing on the various folds of data. Essentially this allows you to train and test on subsets of the same data and validate the results against other subsets of the same data. All data is used at some point for both training and testing allowing more complete use of the dataset.</p>
+<p><strong>Answer: </strong> K-fold cross validation is splitting data up into K folds. The model is then trained on K-1 folds and tested on the remaining fold. This allows training and testing on the various folds of data. This allows for training and testing on subsets of the same data and validate the results against other subsets of the same data. All data is used at some point for both training and testing allowing more complete use of the dataset.</p>
+<p>When performing this process while varying the parameters or a model grid search can minimize the error for a particular measure of how well a model is performing. In this case, the metric used is the r2 score used in the performance_metric function from above.</p>
 
 </div>
 </div>
@@ -14644,10 +14645,10 @@ kqBFREREDJj/B0rR24PJW93qAAAAAElFTkSuQmCC
     <span class="n">cv_sets</span> <span class="o">=</span> <span class="n">ShuffleSplit</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">n_iter</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">test_size</span> <span class="o">=</span> <span class="mf">0.20</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
 
     <span class="c"># Create a decision tree regressor object</span>
-    <span class="n">regressor</span> <span class="o">=</span> <span class="n">DecisionTreeRegressor</span><span class="p">()</span>
+    <span class="n">regressor</span> <span class="o">=</span> <span class="n">DecisionTreeRegressor</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
     <span class="c"># Create a dictionary for the parameter &#39;max_depth&#39; with a range from 1 to 10</span>
-    <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;max_depth&#39;</span><span class="p">:</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)}</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;max_depth&#39;</span><span class="p">:</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">)}</span>
 
     <span class="c"># Transform &#39;performance_metric&#39; into a scoring function using &#39;make_scorer&#39; </span>
     <span class="n">scoring_fnc</span> <span class="o">=</span> <span class="n">make_scorer</span><span class="p">(</span><span class="n">performance_metric</span><span class="p">)</span>
